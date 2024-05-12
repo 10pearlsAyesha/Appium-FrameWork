@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SmokeSuite" parallel="false">
+    <listeners>
+        <listener class-name="com.qa.listeners.TestListener"/>
+    </listeners>
     <test name="ValidLogin">
         <parameter name="platformName" value="Android"/>
         <parameter name="platformVersion" value="11"/>
         <parameter name="deviceName" value="emulator-5554"/>
         <classes>
-            <class name="com.qa.tests.LoginTest"/>
+            <class name="com.qa.tests.LoginTest">
+                <methods>
+                    <include name="verifyValidLogin"/>
+                </methods>
+            </class>
+
         </classes>
+
     </test>
 </suite>
