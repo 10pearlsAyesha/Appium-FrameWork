@@ -14,17 +14,32 @@ import com.qa.utils.Utilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-
+import java.util.HashMap;
+import java.io.InputStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 public class AppFactory {
 
     public  static AppiumDriver driver;
     public static ConfigReader configReader;
-
-
+    protected static HashMap<String, String> stringHashMap = new HashMap<>();
+    InputStream stringIs;
+    Utilities utilities;
+    static Logger log = LogManager.getLogger(AppFactory.class.getName());
     @BeforeTest
     @Parameters({"platformName", "platformVersion", "deviceName"})
-    public void initializer(String platformName, String platformVersion, String deviceName) throws MalformedURLException {
+    public void initializer(String platformName, String platformVersion, String deviceName) throws Exception {
         try {
+            log.debug("This is debug message");
+            log.info("This is Info message");
+            log.warn("This is Warring message");
+            log.error("This is Error message");
+            log.fatal("This is Fatal Error Message");
+            utilities = new Utilities();
+            configReader = new ConfigReader();
+            String xmlFileName = "strings/strings.xml";
+            stringIs = getClass().getClassLoader().getResourceAsStream(xmlFileName);
+            stringHashMap = utilities.parseStringXML(stringIs);
             configReader = new ConfigReader();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("platformName", platformName);
@@ -42,6 +57,10 @@ public class AppFactory {
         }catch (Exception exception){
             exception.printStackTrace();
             throw exception;
+        }finally {
+            if (stringIs != null) {
+                stringIs.close();
+            }
         }
     }
     public void waitForVisibility(WebElement element){

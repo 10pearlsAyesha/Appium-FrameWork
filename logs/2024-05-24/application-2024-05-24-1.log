@@ -1,0 +1,13 @@
+[DEBUG] 2024-05-24 17:22:22.492 com.qa.base.AppFactory:33 - This is debug message
+[INFO ] 2024-05-24 17:22:22.495 com.qa.base.AppFactory:34 - This is Info message
+[WARN ] 2024-05-24 17:22:22.497 com.qa.base.AppFactory:35 - This is Warring message
+[ERROR] 2024-05-24 17:22:22.497 com.qa.base.AppFactory:36 - This is Error message
+[FATAL] 2024-05-24 17:22:22.497 com.qa.base.AppFactory:37 - This is Fatal Error Message
+[DEBUG] 2024-05-24 17:23:08.107 com.qa.base.AppFactory:33 - This is debug message
+[INFO ] 2024-05-24 17:23:08.110 com.qa.base.AppFactory:34 - This is Info message
+[WARN ] 2024-05-24 17:23:08.111 com.qa.base.AppFactory:35 - This is Warring message
+[ERROR] 2024-05-24 17:23:08.111 com.qa.base.AppFactory:36 - This is Error message
+[FATAL] 2024-05-24 17:23:08.112 com.qa.base.AppFactory:37 - This is Fatal Error Message
+[DEBUG] 2024-05-24 17:24:11.226 com.qa.base.AppFactory:33 - This is debug message
+[INFO ] 2024-05-24 17:24:11.230 com.qa.base.AppFactory:34 - This is Info message
+[WARN ] 2024-05-24 17:24:11.230 com.qa.base.AppFactory:35 - This is Warring message
