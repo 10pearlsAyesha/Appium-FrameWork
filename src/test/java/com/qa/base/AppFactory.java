@@ -1,5 +1,4 @@
 package com.qa.base;
-
 import com.qa.utils.ConfigReader;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -22,6 +21,7 @@ public class AppFactory {
 
     public  static AppiumDriver driver;
     public static ConfigReader configReader;
+    protected static String dateTime;
     protected static HashMap<String, String> stringHashMap = new HashMap<>();
     InputStream stringIs;
     Utilities utilities;
@@ -36,6 +36,7 @@ public class AppFactory {
             log.error("This is Error message");
             log.fatal("This is Fatal Error Message");
             utilities = new Utilities();
+            dateTime = utilities.getDateTime();
             configReader = new ConfigReader();
             String xmlFileName = "strings/strings.xml";
             stringIs = getClass().getClassLoader().getResourceAsStream(xmlFileName);
@@ -82,11 +83,14 @@ public class AppFactory {
         waitForVisibility(element);
         return element.getAttribute(attribute);
     }
-
+    public static String getDateAndTime() {
+        return dateTime;
+    }
     @AfterTest
     public static void quiteDriver(){
         if(null != driver){
             driver.quit();
         }
+
     }
 }
