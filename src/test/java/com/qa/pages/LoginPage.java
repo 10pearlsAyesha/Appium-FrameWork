@@ -30,19 +30,19 @@ public class LoginPage extends AppFactory {
     public WebElement errorMessage;
 
     public void enterValidUserName(String userName){
-        sendKeys(userNameTextBox, userName);
+        sendKeys(userNameTextBox, userName,"User name is"+userName);
     }
 
     public void enterPassword(String password){
-        sendKeys(passwordTextbox, password);
+        sendKeys(passwordTextbox, password,"Password is "+password);
     }
 
     public ProductPage clickLoginButton(){
-        clickElement(loginButton);
+        clickElement(loginButton, "Clicking on Login Button");
         return new ProductPage();
     }
 
     public String getErrorMessage(){
-        return getAttribute(errorMessage, "text");
+        return getText(errorMessage, "Error text is: ");
     }
 }

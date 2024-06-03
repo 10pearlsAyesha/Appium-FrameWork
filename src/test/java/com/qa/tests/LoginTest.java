@@ -36,39 +36,39 @@ public class LoginTest extends AppFactory {
     @BeforeMethod
     public void setup(Method method) {
         loginPage = new LoginPage();
-        System.out.println("\n" + "********** Staring Test: " + method.getName() + " **********" + "\n");
+       utilities.log().info("\n" + "********** Staring Test: " + method.getName() + " **********" + "\n");
     }
     @Test
     public void verifyInvalidUserName() {
-        System.out.println("This test is used to verify that User will get Error Message while entering Invalid User Name");
+        utilities.log().info("This test is used to verify that User will get Error Message while entering Invalid User Name");
         loginPage.enterValidUserName(loginUser.getJSONObject("invalidUser").getString("userName"));
         loginPage.enterPassword(loginUser.getJSONObject("invalidUser").getString("password"));
         loginPage.clickLoginButton();
         String actualErrorMessage = loginPage.getErrorMessage();
         String expectedErrorMessage = "Username and password do not match any user in this service.";
-        System.out.println("Actual Error Message is - " + actualErrorMessage + "\n" + "Expected Error Message is - " + expectedErrorMessage);
+        utilities.log().info("Actual Error Message is - " + actualErrorMessage + "\n" + "Expected Error Message is - " + expectedErrorMessage);
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
     @Test
     public void verifyInvalidPassword() {
-        System.out.println("This test is used to verify that User will get Error Message while entering Invalid Password");
+        utilities.log().info("This test is used to verify that User will get Error Message while entering Invalid Password");
         loginPage.enterValidUserName(loginUser.getJSONObject("invalidPassword").getString("userName"));
         loginPage.enterPassword(loginUser.getJSONObject("invalidPassword").getString("password"));
         loginPage.clickLoginButton();
         String actualErrorMessage = loginPage.getErrorMessage();
         String expectedErrorMessage = stringHashMap.get("error_invalid_userName_and_password");
-        System.out.println("Actual Error Message is - " + actualErrorMessage + "\n" + "Expected Error Message is - " + expectedErrorMessage);
+        utilities.log().info("Actual Error Message is - " + actualErrorMessage + "\n" + "Expected Error Message is - " + expectedErrorMessage);
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
     }
     @Test
     public void verifyValidLogin() {
-        System.out.println("This test us used to validate the successful login functionality with valid User Name and Password");
+        utilities.log().info("This test us used to validate the successful login functionality with valid User Name and Password");
         loginPage.enterValidUserName(loginUser.getJSONObject("validUserAndPassword").getString("userName"));
         loginPage.enterPassword(loginUser.getJSONObject("validUserAndPassword").getString("password"));
         productPage = loginPage.clickLoginButton();
         String actualProductTitle = productPage.getTitle();
         String expectedProductTitle = stringHashMap.get("product_title");;
-        System.out.println("Actual Product page title is - " + actualProductTitle + "\n" + "Expected Product page title is - " + expectedProductTitle);
+        utilities.log().info("Actual Product page title is - " + actualProductTitle + "\n" + "Expected Product page title is - " + expectedProductTitle);
         Assert.assertEquals(actualProductTitle, expectedProductTitle);
     }
 }

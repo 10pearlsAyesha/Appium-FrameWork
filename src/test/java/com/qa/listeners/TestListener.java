@@ -4,6 +4,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.qa.base.AppDriver;
 import com.qa.base.AppFactory;
+import com.qa.reports.ExtentReport;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -48,28 +49,39 @@ public class TestListener implements ITestListener {
         String completeImagePath = System.getProperty("user.dir") + File.separator + imagePath;
 
         try {
-            FileUtils.copyFile(file, new File(imagePath));
-            Reporter.log("This is the sample Screenshot");
+            FileUtils.copyFile(file, new File(completeImagePath));
+      Reporter.log("This is the sample Screenshot");
             Reporter.log("<a href='" + completeImagePath + "'> <img src='" + completeImagePath + "' height='100' width='100'/> </a>");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ExtentReport.getTest().fail("Test Fail",
+                MediaEntityBuilder.createScreenCaptureFromPath(completeImagePath).build());
+        assert encoded != null;
+        ExtentReport.getTest().fail("Test Fail",
+                MediaEntityBuilder.createScreenCaptureFromBase64String(new String(encoded, StandardCharsets.US_ASCII)).build());
+        ExtentReport.getTest().fail(result.getThrowable());
     }
 
     @Override
     public void onTestStart(ITestResult result) {
-
+        // TODO: Auto-generated method stub
+        ExtentReport.startTest(result.getName(), result.getMethod().getDescription())
+                .assignCategory(AppDriver.getPlatformName() + "-" + AppDriver.getDeviceName())
+                .assignAuthor("10Pearls");
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-
+        // TODO: Auto-generated method stub
+        ExtentReport.getTest().log(Status.PASS, "Test Passed");
 
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-
+        // TODO: Auto-generated method stub
+        ExtentReport.getTest().log(Status.SKIP, "Test Skipped");
     }
 
     @Override
@@ -84,6 +96,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-
+        // TODO: Auto-generated method stub
+        ExtentReport.getExtentReports().flush();
     }
 }
