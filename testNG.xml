@@ -14,7 +14,7 @@
                       <include name="verifyValidLogin"/>
                   </methods> -->
               </class>
-
+            <class name="com.qa.tests.ProductTest"/>
           </classes>
 
       </test>

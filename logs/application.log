@@ -1,8 +1,7 @@
-[INFO ] 2024-06-11 18:18:04.404 com.qa.tests.LoginTest:65 - This test us used to validate the successful login functionality with valid User Name and Password
-[INFO ] 2024-06-11 18:18:04.473 com.qa.base.AppFactory:105 - User name isstandard_user
-[INFO ] 2024-06-11 18:18:05.664 com.qa.base.AppFactory:105 - Password is secret_sauce
-[INFO ] 2024-06-11 18:18:06.732 com.qa.base.AppFactory:98 - Clicking on Login Button
-[INFO ] 2024-06-11 18:18:08.573 com.qa.base.AppFactory:117 - Product Page Title is: PRODUCTS
-[INFO ] 2024-06-11 18:18:08.574 com.qa.tests.LoginTest:71 - Actual Product page title is - PRODUCTS
-Expected Product page title is - null
-[INFO ] 2024-06-11 18:18:10.964 com.qa.base.AppFactory:48 - Appium Server shutdown...
+[INFO ] 2024-06-14 16:22:05.647 com.qa.base.AppFactory:111 - Password is: secret_sauce
+[INFO ] 2024-06-14 16:22:06.731 com.qa.base.AppFactory:104 - Clicking on Login Button
+[INFO ] 2024-06-14 16:22:08.047 com.qa.base.AppFactory:124 - Title is: Sauce Labs Backpack
+[INFO ] 2024-06-14 16:22:08.161 com.qa.base.AppFactory:124 - Product Price is: $29.99
+[INFO ] 2024-06-14 16:22:08.337 com.qa.base.AppFactory:104 - Clicking on Settings Button
+[INFO ] 2024-06-14 16:22:10.040 com.qa.base.AppFactory:104 - Clicking on Logout Button
+[INFO ] 2024-06-14 16:22:10.751 com.qa.base.AppFactory:48 - Shutting down Appium server...

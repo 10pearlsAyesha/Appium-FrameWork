@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestListener implements ITestListener {
+
+    @Override
     public void onTestFailure(ITestResult result) {
         if (result.getThrowable() != null) {
             StringWriter stringWriter = new StringWriter();
@@ -35,11 +37,11 @@ public class TestListener implements ITestListener {
         byte[] encoded = null;
         try {
             encoded = Base64.encodeBase64(FileUtils.readFileToByteArray(file));
-        }catch (IOException exception){
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
 
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<String, String>();
         params = result.getTestContext().getCurrentXmlTest().getAllParameters();
 
         String imagePath = "screenshots" + File.separator + params.get("platformName") + "_" + params.get("platformVersion")
@@ -49,38 +51,35 @@ public class TestListener implements ITestListener {
         String completeImagePath = System.getProperty("user.dir") + File.separator + imagePath;
 
         try {
-            FileUtils.copyFile(file, new File(completeImagePath));
-      Reporter.log("This is the sample Screenshot");
+            FileUtils.copyFile(file, new File(imagePath));
+            Reporter.log("This is the sample screenshot");
             Reporter.log("<a href='" + completeImagePath + "'> <img src='" + completeImagePath + "' height='100' width='100'/> </a>");
         } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        ExtentReport.getTest().fail("Test Fail",
+        ExtentReport.getTest().fail("Test Failed",
                 MediaEntityBuilder.createScreenCaptureFromPath(completeImagePath).build());
         assert encoded != null;
-        ExtentReport.getTest().fail("Test Fail",
+        ExtentReport.getTest().fail("Test Failed",
                 MediaEntityBuilder.createScreenCaptureFromBase64String(new String(encoded, StandardCharsets.US_ASCII)).build());
         ExtentReport.getTest().fail(result.getThrowable());
     }
 
     @Override
     public void onTestStart(ITestResult result) {
-        // TODO: Auto-generated method stub
         ExtentReport.startTest(result.getName(), result.getMethod().getDescription())
-                .assignCategory(AppDriver.getPlatformName() + "-" + AppDriver.getDeviceName())
-                .assignAuthor("10Pearls");
+                .assignCategory(AppDriver.getPlatform() + " - " + AppDriver.getDeviceName())
+                .assignAuthor("Azfar");
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        // TODO: Auto-generated method stub
         ExtentReport.getTest().log(Status.PASS, "Test Passed");
-
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        // TODO: Auto-generated method stub
         ExtentReport.getTest().log(Status.SKIP, "Test Skipped");
     }
 
@@ -96,7 +95,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-        // TODO: Auto-generated method stub
         ExtentReport.getExtentReports().flush();
     }
 }

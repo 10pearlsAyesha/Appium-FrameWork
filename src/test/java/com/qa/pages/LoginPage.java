@@ -4,45 +4,49 @@ import com.qa.base.AppDriver;
 import com.qa.base.AppFactory;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage extends AppFactory {
-    public LoginPage(){
+
+    public LoginPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppDriver.getDriver()), this);
     }
 
     @AndroidFindBy(accessibility = "test-Username")
-    public WebElement userNameTextBox;
+    private WebElement userNameTextbox;
 
     @AndroidFindBy(accessibility = "test-Password")
-    public WebElement passwordTextbox;
-
-    @AndroidFindBy(accessibility = "test-LOGIN")
-    public WebElement loginButton;
+    private WebElement passwordTextbox;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Username and password do not match any user in this service.\"]")
-    public WebElement errorMessage;
+    private WebElement errorTextMessage;
 
-    public void enterValidUserName(String userName){
-        sendKeys(userNameTextBox, userName,"User name is"+userName);
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"LOGIN\"]")
+    private WebElement loginButton;
+
+    public LoginPage enterUserName(String userName) {
+        sendKeys(userNameTextbox, userName, "Login with: " + userName);
+        return this;
     }
 
-    public void enterPassword(String password){
-        sendKeys(passwordTextbox, password,"Password is "+password);
+    public LoginPage enterPassword(String password) {
+        sendKeys(passwordTextbox, password, "Password is: " + password);
+        return this;
     }
 
-    public ProductPage clickLoginButton(){
+    public ProductsPage clickLoginButton() {
         clickElement(loginButton, "Clicking on Login Button");
-        return new ProductPage();
+        return new ProductsPage();
     }
 
-    public String getErrorMessage(){
-        return getText(errorMessage, "Error text is: ");
+    public ProductsPage login(String userName, String password) {
+        enterUserName(userName);
+        enterPassword(password);
+        return clickLoginButton();
+    }
+
+    public String getErrorMessage() {
+        return getText(errorTextMessage, "Error Text is: ");
     }
 }
