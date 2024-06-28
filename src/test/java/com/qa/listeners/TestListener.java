@@ -70,7 +70,7 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         ExtentReport.startTest(result.getName(), result.getMethod().getDescription())
                 .assignCategory(AppDriver.getPlatform() + " - " + AppDriver.getDeviceName())
-                .assignAuthor("Ayesha Alloudin");
+                .assignAuthor("Shumaila Idress");
     }
 
     @Override
